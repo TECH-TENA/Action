@@ -1,0 +1,30 @@
+name: Build and Push to ECR
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: carles
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Build Docker image
+        run: |
+          docker run -d -P s5carles/ansible:v1 
+
+      - name: Tag image
+        run: |
+          docker tag s5carles/ansible:v1 147997150632.dkr.ecr.us-east-1.amazonaws.com/s5carles:v1
+
+      - name: Login to ECR
+        run: |
+          aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 147997150632.dkr.ecr.us-east-1.amazonaws.com
+
+      - name: Push to ECR
+        run: |
+          docker push 147997150632.dkr.ecr.us-east-1.amazonaws.com/s5carles:v1
