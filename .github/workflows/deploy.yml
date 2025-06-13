@@ -19,7 +19,7 @@ jobs:
 
       - name: Tag image
         run: |
-          docker tag s5carles/ansible:v1 147997150632.dkr.ecr.us-east-1.amazonaws.com/carles/github-action/ansible:v1
+          docker tag s5carles/ansible:v1 147997150632.dkr.ecr.us-east-1.amazonaws.com/carles/github-action:v1
 
       - name: Login to ECR
         run: |
@@ -27,4 +27,4 @@ jobs:
 
       - name: Push to ECR
         run: |
-          docker push 147997150632.dkr.ecr.us-east-1.amazonaws.com/carles/github-action/ansible:v1
+          docker push 147997150632.dkr.ecr.us-east-1.amazonaws.com/carles/github-action:v1
